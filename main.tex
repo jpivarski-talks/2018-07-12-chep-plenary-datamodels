@@ -242,11 +242,115 @@ To the left is a PAW script (pre-ROOT), creating and filling histograms.
 \end{frame}
 
 \begin{frame}[fragile]{Indexed analysis}
+\vspace{0.1 cm}
+\begin{columns}
+\column{1.09\linewidth}
+\begin{onlyenv}<1-2>But beyond names (and subdirectories), can we manipulate analysis objects using even more semantic information?
 
+\scriptsize
+\begin{minted}{python}
+>>> from histbook import *
+>>> histograms = \
+...     ChannelsBook(
+...         mass = SamplesBook(["data", "signal", "background"],
+...                   SystematicsBook(Hist(bin("x", 5, 0, 5), systematic=[0]),
+...                                   Hist(bin("x + epsilon", 5, 0, 5), systematic=[1]),
+...                                   Hist(bin("x - epsilon", 5, 0, 5), systematic=[-1]))),
+...         mctruth = SamplesBook(["signal", "background"],
+...                         Book(param1=Hist(bin("param1", 5, 0, 5)),
+...                              param2=Hist(bin("param2", 5, 0, 5)))))
+\end{minted}
 
+\normalsize
+defines $3\times 3 + 2\times2$ histograms and verifies that binning matches for systematic variations.
 
-
+\scriptsize
+\begin{uncoverenv}<2->
+\begin{minted}{python}
+>>> histograms.allkeys()
+['mass', 'mass/data', 'mass/data/0', 'mass/data/0/0', 'mass/data/0/1', 'mass/data/0/2',
+ 'mass/signal', 'mass/signal/0', 'mass/signal/0/0', 'mass/signal/0/1', 'mass/signal/0/2',
+ 'mass/background', 'mass/background/0', 'mass/background/0/0',  'mass/background/0/1',
+ 'mass/background/0/2', 'mctruth', 'mctruth/signal', 'mctruth/signal/0',
+ 'mctruth/signal/0/param2', 'mctruth/signal/0/param1', 'mctruth/background',
+ 'mctruth/background/0', 'mctruth/background/0/param2', 'mctruth/background/0/param1']
+\end{minted}
+\end{uncoverenv}
+\vspace{-0.7 cm}
+\end{onlyenv}
+\begin{onlyenv}<3>
+\scriptsize
+\begin{minted}{python}
+>>> print(histograms["mass"])                   # print just the "mass" channel
+SamplesBook({
+    'data': Book({
+          '0': SystematicsBook({
+                '0': Hist(bin('x', 5, 0.0, 5.0)),
+                '1': Hist(bin('x + epsilon', 5, 0.0, 5.0)),
+                '2': Hist(bin('x - epsilon', 5, 0.0, 5.0))
+                })
+          }),
+    'signal': Book({
+          '0': SystematicsBook({
+                '0': Hist(bin('x', 5, 0.0, 5.0)),
+                '1': Hist(bin('x + epsilon', 5, 0.0, 5.0)),
+                '2': Hist(bin('x - epsilon', 5, 0.0, 5.0))
+                })
+          }),
+    'background': Book({
+          '0': SystematicsBook({
+                '0': Hist(bin('x', 5, 0.0, 5.0)),
+                '1': Hist(bin('x + epsilon', 5, 0.0, 5.0)),
+                '2': Hist(bin('x - epsilon', 5, 0.0, 5.0))
+                })
+          })})
+\end{minted}
+\end{onlyenv}
+\begin{onlyenv}<4>
+\scriptsize
+\begin{minted}{python}
+>>> print(histograms.view("*/signal/*"))        # select the subtree matching this pattern
+ViewBook({
+      'mass': ViewBook({
+            'signal': ViewBook({
+                  '0': ViewBook({
+                        '0': Hist(bin('x', 5, 0.0, 5.0)),
+                        '1': Hist(bin('x + epsilon', 5, 0.0, 5.0)),
+                        '2': Hist(bin('x - epsilon', 5, 0.0, 5.0))
+                        })
+                  })
+            }),
+      'mctruth': ViewBook({
+            'signal': ViewBook({
+                  '0': ViewBook({
+                        'param2': Hist(bin('param2', 5, 0.0, 5.0)),
+                        'param1': Hist(bin('param1', 5, 0.0, 5.0))
+                        })
+                  })
+            })
+      })
+>>> histograms.view("*/data/*").fill(data)      # fill selectively
+>>> histograms.view("*/signal/*").fill(signal)
+>>> histograms.view("*/background/*").fill(background)
+\end{minted}
+\end{onlyenv}
+\end{columns}
 \end{frame}
+
+\begin{frame}{Indexed analysis}
+\large
+\vspace{0.5 cm}
+Rich indexing is considered an essential part of data analysis beyond HEP.
+\begin{itemize}
+\item Spreadsheets encode semantic meaning in space on the grid.
+\item Pandas (2-D) and xarray ($n$-D) differ from Numpy in that they have many index types and perform operations that only have meaning in light of those indexes.
+\item Indexing is a central question in database design.
+\end{itemize}
+
+\vspace{0.5 cm}
+Include F.A.S.T.\ example here, showing that HEP can make use of this information.
+\end{frame}
+
 
 \begin{frame}{Advanced histogramming}
 \end{frame}
