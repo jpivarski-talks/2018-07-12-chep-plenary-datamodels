@@ -232,11 +232,14 @@ nt/plot 2.apz ! ! ! ! ! \textcolor{red}{405}
 \column{0.5\linewidth}
 To the left is a PAW script (pre-ROOT), creating and filling histograms.
 
-\vspace{1 cm}
+\vspace{0.75 cm}
 \textcolor{red}{They must be identified by integers because histograms didn't have \underline{\it names} back then.}
 
-\vspace{1 cm}
-\uncover<2->{\bf Acquiring the ability to name stuff was as fundamental to HEP data analysis as handwashing was to medical science!}
+\vspace{0.75 cm}
+\uncover<2->{{\bf Acquiring the ability to name stuff was as fundamental to HEP data analysis as handwashing was to medical science!}}
+
+\vspace{0.75 cm}
+\uncover<3->{But we don't have to stop there. There's more to indexing than key-value pairs.}
 \end{columns}
 \end{frame}
 
@@ -346,36 +349,31 @@ ViewBook({
 \end{frame}
 
 \begin{frame}{Indexed analysis}
-\large
+\Large
 \vspace{0.5 cm}
-Rich indexing is considered an essential part of data analysis beyond HEP.
-\begin{itemize}
-\item Spreadsheets encode semantic meaning in space on the grid.
-\item Pandas (2-D) and xarray ($n$-D) differ from Numpy in that they have indexes beyond just entry number and perform operations that only have meaning in light of those indexes.
-\item Indexing is a central question in database design.
-\end{itemize}
+Using tools with rich indexing systemizes what we're doing with naming conventions, splitting histogram names on underscores, etc.
 
-\vspace{0.5 cm}
-Include F.A.S.T.\ example here, showing that HEP can make use of this information.
+\vspace{1 cm}
+Pandas is not a TTree replacement--- if anything, it's a histogram organizer!
 \end{frame}
 
 \begin{frame}{Advanced histogramming}
 \large
 \vspace{0.5 cm}
-{\Large Perhaps unsurprisingly, HEP histogram tools are more sophisticated any any others I've seen.}
+{\Large The histograms themselves, however, are more sophisticated in HEP than elsewhere.}
 \vspace{0.25 cm}
 \begin{itemize}\setlength{\itemsep}{0.25 cm}
-\item<2-> As far as I have found, HEP histogramming tools (ROOT, YODA, AIDA, HippoDraw, Jas3, mn\_fit, PAW, HBOOK) are \underline{\it unique} in conceiving of a histogram as a container to be filled, added, and accessed programmatically.
+\item<2-> As far as I have found, HEP histogramming tools (ROOT, YODA, AIDA, HippoDraw, Jas3, mn\_fit, PAW, HBOOK) are \underline{\it unique} in conceiving of a histogram as a container to be filled, merged, and accessed programmatically.
 \item<3-> In many non-HEP packages, ``histogram'' is more of a display option than an analysis tool, with no way to access contents or control binning.
-\item<4-> Only HEP tools have ``profile'' histograms--- dependent variable functions, rather than independent variable distributions.
+\item<4-> Only HEP tools have ``profile'' histograms--- functions of dependent variables, in addition to distributions on independent variables.
 \item<5-> Log-scale support is often weak in non-HEP graphics packages, particularly for empty bins.
 \end{itemize}
 \begin{center}
-\uncover<6->{\textcolor{red}{These features aren't difficult: they're just our responsibility.}}
+\uncover<6->{\textcolor{red}{These features aren't difficult: but they're our responsibility.}}
 \end{center}
 \end{frame}
 
-\begin{frame}{Machine learning and ansatz fitting}
+\begin{frame}{Machine learning versus ansatz fitting}
 \end{frame}
 
 
