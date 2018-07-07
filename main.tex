@@ -20,6 +20,7 @@
 \usepackage{bold-extra}
 \usepackage{minted}
 \usepackage[thicklines]{cancel}
+\usepackage{fancyvrb}
 
 \xdefinecolor{dianablue}{rgb}{0.18,0.24,0.31}
 \xdefinecolor{darkblue}{rgb}{0.1,0.1,0.7}
@@ -52,9 +53,208 @@
 
 % START START START START START START START START START START START START START
 
-\begin{frame}{First slide}
+\begin{frame}{}
+\Large
 \vspace{0.5 cm}
-HERE
+\begin{center}
+I'm going to start with a dumb comparison, to make a point.
+\end{center}
 \end{frame}
+
+\begin{frame}{\only<1>{We measure globally distributed data in hundreds of PB}\only<2>{But for ``web scale'' companies, 100 PB = 1 truck}}
+\vspace{0.35 cm}
+\includegraphics[width=0.73\linewidth]{cern-200pb.png}
+
+\vspace{-4.8 cm}
+\uncover<2->{\mbox{ } \hfill \includegraphics[width=0.7\linewidth]{aws-snowmobile.jpg}\hspace{-1 cm}}
+\end{frame}
+
+\begin{frame}{The point?}
+\Large
+\vspace{0.5 cm}
+HEP is no longer the main user or developer in this problem space.
+
+\vspace{1 cm}
+\begin{uncoverenv}<2->
+A better metric, which unfortunately I can't quantify:
+\begin{itemize}
+\item $x$~FTEs in HEP developing open source analysis tools
+\item $y$~FTEs outside of HEP developing open source analysis tools
+(not sure of $x$ and $y$, but $x \ll y$)
+\end{itemize}
+\end{uncoverenv}
+
+\vspace{0.5 cm}
+\uncover<3->{$\to$ there's a lot of good data analysis software out there!}
+\end{frame}
+
+\begin{frame}{Another very important metric}
+\Large
+\vspace{0.25 cm}
+\begin{itemize}
+\item High-energy physicists have been performing big data analytics (i.e.\ reducing large datasets to statistical inferences with computers) \textcolor{darkblue}{for 50~years.}
+\item<2-> Web-scale companies have been doing it \textcolor{darkblue}{for 10~years.}
+\end{itemize}
+
+\vspace{0.5 cm}
+\uncover<3->{HEP analyses have grown sophisticated--- there are certain things we expect but don't find in industry-grade software.}
+
+\vspace{0.5 cm}
+\uncover<4->{The simple prescription of ``just use Spark'' would leave analyzers}
+
+\vspace{0.2 cm}
+\uncover<4->{without some necessary tools.}
+\end{frame}
+
+\begin{frame}{Reactions?}
+\large
+\vspace{0.5 cm}
+\begin{columns}[t]
+\column{0.25\linewidth}
+\textcolor{darkblue}{\underline{Option \#1}}
+
+\vspace{0.25 cm}
+Our needs are very specific. Continue developing our own everything.
+
+\column{0.25\linewidth}
+\begin{uncoverenv}<2->
+\textcolor{darkblue}{\hspace{-0.18 cm}\underline{Option \#2}}
+
+\vspace{0.25 cm}
+Modern big data software has some good ideas; integrate those {\it ideas} into our stack.
+\end{uncoverenv}
+
+\column{0.25\linewidth}
+\begin{uncoverenv}<3->
+\only<3-4>{\textcolor{darkblue}{\hspace{-0.18 cm}\underline{Option \#3}}}\only<5->{\textcolor{red}{\hspace{-0.18 cm}\underline{Option \#3}}}
+
+\vspace{0.25 cm}
+\only<3-4>{Narrow our scope to HEP-specific tools, what no one else is developing, and make them interoperate with non-HEP tools for the common parts.}\only<5->{\textcolor{red}{Narrow our scope to HEP-specific tools, what no one else is developing, and make them interoperate with non-HEP tools for the common parts.}}
+\end{uncoverenv}
+
+\column{0.25\linewidth}
+\begin{uncoverenv}<4->
+\textcolor{darkblue}{\hspace{-0.18 cm}\underline{Option \#4}}
+
+\vspace{0.25 cm}
+Promulgate the HEP way of doing analysis to bring the wider world up to our level of sophistication. Then they'll develop solutions for us.
+\end{uncoverenv}
+\end{columns}
+
+\vspace{1 cm}
+\uncover<5->{\textcolor{red}{This is my opinion, but it begs the question of where to draw the line.}}
+\end{frame}
+
+\begin{frame}{Three examples each:}
+\Large
+\vspace{0.5 cm}
+\begin{columns}[t]
+\column{0.5\linewidth}
+\mbox{\hspace{0.25 cm}\underline{What they've got}}
+
+\vspace{0.25 cm}
+\begin{enumerate}
+\item Distributed DAG processing
+\item Indexed analysis
+\item Machine learning
+\end{enumerate}
+
+\column{0.5\linewidth}
+\mbox{\hspace{0.45 cm}\underline{What more we'd need}}
+
+\vspace{0.25 cm}
+\begin{enumerate}
+\item Nested data structures
+\item Advanced histogramming
+\item Ansatz fitting
+\end{enumerate}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{Distributed DAG processing}
+\end{frame}
+
+\begin{frame}{Nested data structures}
+\end{frame}
+
+\begin{frame}{Indexed analysis}
+\Large
+\vspace{0.5 cm}
+\begin{center}
+To understand what I mean by ``indexed analysis,''
+
+consider analysis with less indexing than modern HEP.
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Indexed analysis}
+\vspace{0.1 cm}
+\begin{columns}
+\column{0.5\linewidth}
+\tiny
+\begin{Verbatim}[commandchars=\\\{\}]
+h/cr/1d \textcolor{red}{201} 'd0miss' 100 -0.5e-3 0.5e-3
+h/cr/1d \textcolor{red}{202} 'z0miss' 100 -0.015 0.015
+h/cr/1d \textcolor{red}{203} 'pxmiss' 100 -0.076 0.076
+h/cr/1d \textcolor{red}{204} 'pymiss' 100 -0.076 0.076
+h/cr/1d \textcolor{red}{205} 'pzmiss' 100 -0.076 0.076
+nt/plot 2.d0 ! ! ! ! ! 201
+nt/plot 2.z0 ! ! ! ! ! 202
+nt/plot 2.px ! ! ! ! ! 203
+nt/plot 2.py ! ! ! ! ! 204
+nt/plot 2.pz ! ! ! ! ! 205
+
+h/cr/1d \textcolor{red}{301} 'normalized d0miss' 100 -10 10
+h/cr/1d \textcolor{red}{302} 'normalized z0miss' 100 -10 10
+h/cr/1d \textcolor{red}{303} 'normalized pxmiss' 100 -10 10
+h/cr/1d \textcolor{red}{304} 'normalized pymiss' 100 -10 10
+h/cr/1d \textcolor{red}{305} 'normalized pzmiss' 100 -10 10
+nt/plot 2.d0/sqrt(ed0) ! ! ! ! ! 301
+nt/plot 2.z0/sqrt(ez0) ! ! ! ! ! 302
+nt/plot 2.px/sqrt(epx) ! ! ! ! ! 303
+nt/plot 2.py/sqrt(epy) ! ! ! ! ! 304
+nt/plot 2.pz/sqrt(epz) ! ! ! ! ! 305
+
+h/cr/1d \textcolor{red}{401} 'd0miss after constraint' 100 -0.1e-16 0.1e-16
+h/cr/1d \textcolor{red}{402} 'z0miss after constraint' 100 -0.1e-15 0.1e-15
+h/cr/1d \textcolor{red}{403} 'pxmiss after constraint' 100 -0.01 0.01
+h/cr/1d \textcolor{red}{404} 'pymiss after constraint' 100 -0.01 0.01
+h/cr/1d \textcolor{red}{405} 'pzmiss after constraint' 100 -0.01 0.01
+nt/plot 2.ad0 ! ! ! ! ! 401
+nt/plot 2.az0 ! ! ! ! ! 402
+nt/plot 2.apx ! ! ! ! ! 403
+nt/plot 2.apy ! ! ! ! ! 404
+nt/plot 2.apz ! ! ! ! ! 405
+\end{Verbatim}
+
+\column{0.01\linewidth}
+
+\column{0.5\linewidth}
+To the left is a PAW script (pre-ROOT), creating and filling histograms.
+
+\vspace{1 cm}
+\textcolor{red}{They must be identified by integers because histograms didn't have names back then.}
+
+\vspace{1 cm}
+\uncover<2->{\bf Acquiring the ability to name stuff was as fundamental to HEP data analysis as handwashing was to medical science!}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Indexed analysis}
+
+
+
+
+\end{frame}
+
+\begin{frame}{Advanced histogramming}
+\end{frame}
+
+\begin{frame}{Machine learning and ansatz fitting}
+\end{frame}
+
+
+
 
 \end{document}
