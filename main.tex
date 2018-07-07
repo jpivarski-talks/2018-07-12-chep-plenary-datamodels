@@ -92,8 +92,8 @@ A better metric, which unfortunately I can't quantify:
 \Large
 \vspace{0.25 cm}
 \begin{itemize}
-\item High-energy physicists have been performing big data analytics (i.e.\ reducing large datasets to statistical inferences with computers) \textcolor{darkblue}{for 50~years.}
-\item<2-> Web-scale companies have been doing it \textcolor{darkblue}{for 10~years.}
+\item High-energy physicists have been performing big data analytics (i.e.\ reducing large datasets to statistical inferences with computers) for about \textcolor{darkblue}{\underline{50~years}.}
+\item<2-> Web-scale companies have been doing it for about \textcolor{darkblue}{\underline{10~years}.}
 \end{itemize}
 
 \vspace{0.5 cm}
@@ -121,7 +121,7 @@ Our needs are very specific. Continue developing our own everything.
 \textcolor{darkblue}{\hspace{-0.18 cm}\underline{Option \#2}}
 
 \vspace{0.25 cm}
-Modern big data software has some good ideas; integrate those {\it ideas} into our stack.
+Modern big data software has some good ideas; integrate those \underline{\it ideas} into our stack.
 \end{uncoverenv}
 
 \column{0.25\linewidth}
@@ -142,7 +142,7 @@ Promulgate the HEP way of doing analysis to bring the wider world up to our leve
 \end{columns}
 
 \vspace{1 cm}
-\uncover<5->{\textcolor{red}{This is my opinion, but it begs the question of where to draw the line.}}
+\uncover<5->{\textcolor{red}{\#3 is my opinion, but it begs the question of where to draw the line.}}
 \end{frame}
 
 \begin{frame}{Three examples each:}
@@ -160,7 +160,7 @@ Promulgate the HEP way of doing analysis to bring the wider world up to our leve
 \end{enumerate}
 
 \column{0.5\linewidth}
-\mbox{\hspace{0.45 cm}\underline{What more we'd need}}
+\mbox{\hspace{0.45 cm}\underline{What we'd need}}
 
 \vspace{0.25 cm}
 \begin{enumerate}
@@ -172,23 +172,22 @@ Promulgate the HEP way of doing analysis to bring the wider world up to our leve
 \end{columns}
 \end{frame}
 
-\begin{frame}{Distributed DAG processing}
+\begin{frame}{They've got: distributed DAG processing}
 \end{frame}
 
-\begin{frame}{Nested data structures}
+\begin{frame}{We'd need: Nested data structures}
 \end{frame}
 
-\begin{frame}{Indexed analysis}
+\begin{frame}{They've got: indexed analysis}
 \Large
 \vspace{0.5 cm}
 \begin{center}
-To understand what I mean by ``indexed analysis,''
-
-consider analysis with less indexing than modern HEP.
+To understand what I mean by ``indexed analysis,'' consider \\
+analysis with \underline{\it less advanced indexing} than modern HEP.
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{Indexed analysis}
+\begin{frame}[fragile]{They've got: indexed analysis}
 \vspace{0.1 cm}
 \begin{columns}
 \column{0.5\linewidth}
@@ -199,33 +198,33 @@ h/cr/1d \textcolor{red}{202} 'z0miss' 100 -0.015 0.015
 h/cr/1d \textcolor{red}{203} 'pxmiss' 100 -0.076 0.076
 h/cr/1d \textcolor{red}{204} 'pymiss' 100 -0.076 0.076
 h/cr/1d \textcolor{red}{205} 'pzmiss' 100 -0.076 0.076
-nt/plot 2.d0 ! ! ! ! ! 201
-nt/plot 2.z0 ! ! ! ! ! 202
-nt/plot 2.px ! ! ! ! ! 203
-nt/plot 2.py ! ! ! ! ! 204
-nt/plot 2.pz ! ! ! ! ! 205
+nt/plot 2.d0 ! ! ! ! ! \textcolor{red}{201}
+nt/plot 2.z0 ! ! ! ! ! \textcolor{red}{202}
+nt/plot 2.px ! ! ! ! ! \textcolor{red}{203}
+nt/plot 2.py ! ! ! ! ! \textcolor{red}{204}
+nt/plot 2.pz ! ! ! ! ! \textcolor{red}{205}
 
 h/cr/1d \textcolor{red}{301} 'normalized d0miss' 100 -10 10
 h/cr/1d \textcolor{red}{302} 'normalized z0miss' 100 -10 10
 h/cr/1d \textcolor{red}{303} 'normalized pxmiss' 100 -10 10
 h/cr/1d \textcolor{red}{304} 'normalized pymiss' 100 -10 10
 h/cr/1d \textcolor{red}{305} 'normalized pzmiss' 100 -10 10
-nt/plot 2.d0/sqrt(ed0) ! ! ! ! ! 301
-nt/plot 2.z0/sqrt(ez0) ! ! ! ! ! 302
-nt/plot 2.px/sqrt(epx) ! ! ! ! ! 303
-nt/plot 2.py/sqrt(epy) ! ! ! ! ! 304
-nt/plot 2.pz/sqrt(epz) ! ! ! ! ! 305
+nt/plot 2.d0/sqrt(ed0) ! ! ! ! ! \textcolor{red}{301}
+nt/plot 2.z0/sqrt(ez0) ! ! ! ! ! \textcolor{red}{302}
+nt/plot 2.px/sqrt(epx) ! ! ! ! ! \textcolor{red}{303}
+nt/plot 2.py/sqrt(epy) ! ! ! ! ! \textcolor{red}{304}
+nt/plot 2.pz/sqrt(epz) ! ! ! ! ! \textcolor{red}{305}
 
 h/cr/1d \textcolor{red}{401} 'd0miss after constraint' 100 -0.1e-16 0.1e-16
 h/cr/1d \textcolor{red}{402} 'z0miss after constraint' 100 -0.1e-15 0.1e-15
 h/cr/1d \textcolor{red}{403} 'pxmiss after constraint' 100 -0.01 0.01
 h/cr/1d \textcolor{red}{404} 'pymiss after constraint' 100 -0.01 0.01
 h/cr/1d \textcolor{red}{405} 'pzmiss after constraint' 100 -0.01 0.01
-nt/plot 2.ad0 ! ! ! ! ! 401
-nt/plot 2.az0 ! ! ! ! ! 402
-nt/plot 2.apx ! ! ! ! ! 403
-nt/plot 2.apy ! ! ! ! ! 404
-nt/plot 2.apz ! ! ! ! ! 405
+nt/plot 2.ad0 ! ! ! ! ! \textcolor{red}{401}
+nt/plot 2.az0 ! ! ! ! ! \textcolor{red}{402}
+nt/plot 2.apx ! ! ! ! ! \textcolor{red}{403}
+nt/plot 2.apy ! ! ! ! ! \textcolor{red}{404}
+nt/plot 2.apz ! ! ! ! ! \textcolor{red}{405}
 \end{Verbatim}
 
 \column{0.01\linewidth}
@@ -234,19 +233,22 @@ nt/plot 2.apz ! ! ! ! ! 405
 To the left is a PAW script (pre-ROOT), creating and filling histograms.
 
 \vspace{1 cm}
-\textcolor{red}{They must be identified by integers because histograms didn't have names back then.}
+\textcolor{red}{They must be identified by integers because histograms didn't have \underline{\it names} back then.}
 
 \vspace{1 cm}
 \uncover<2->{\bf Acquiring the ability to name stuff was as fundamental to HEP data analysis as handwashing was to medical science!}
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Indexed analysis}
+\begin{frame}[fragile]{They've got: indexed analysis}
 \vspace{0.1 cm}
 \begin{columns}
 \column{1.09\linewidth}
 \begin{onlyenv}<1-2>But beyond names (and subdirectories), can we manipulate analysis objects using even more semantic information?
 
+\hfill \includegraphics[height=1 cm]{histbook-logo.pdf}
+
+\vspace{-1 cm}
 \scriptsize
 \begin{minted}{python}
 >>> from histbook import *
@@ -337,13 +339,13 @@ ViewBook({
 \end{columns}
 \end{frame}
 
-\begin{frame}{Indexed analysis}
+\begin{frame}{They've got: indexed analysis}
 \large
 \vspace{0.5 cm}
 Rich indexing is considered an essential part of data analysis beyond HEP.
 \begin{itemize}
 \item Spreadsheets encode semantic meaning in space on the grid.
-\item Pandas (2-D) and xarray ($n$-D) differ from Numpy in that they have many index types and perform operations that only have meaning in light of those indexes.
+\item Pandas (2-D) and xarray ($n$-D) differ from Numpy in that they have indexes beyond just entry number and perform operations that only have meaning in light of those indexes.
 \item Indexing is a central question in database design.
 \end{itemize}
 
@@ -351,8 +353,20 @@ Rich indexing is considered an essential part of data analysis beyond HEP.
 Include F.A.S.T.\ example here, showing that HEP can make use of this information.
 \end{frame}
 
-
 \begin{frame}{Advanced histogramming}
+\large
+\vspace{0.5 cm}
+{\Large Perhaps unsurprisingly, HEP histogram tools are more sophisticated any any others I've seen.}
+\vspace{0.25 cm}
+\begin{itemize}\setlength{\itemsep}{0.25 cm}
+\item<2-> As far as I have found, HEP histogramming tools (ROOT, YODA, AIDA, HippoDraw, Jas3, mn\_fit, PAW, HBOOK) are \underline{\it unique} in conceiving of a histogram as a container to be filled, added, and accessed programmatically.
+\item<3-> In many non-HEP packages, ``histogram'' is more of a display option than an analysis tool, with no way to access contents or control binning.
+\item<4-> Only HEP tools have ``profile'' histograms--- dependent variable functions, rather than independent variable distributions.
+\item<5-> Log-scale support is often weak in non-HEP graphics packages, particularly for empty bins.
+\end{itemize}
+\begin{center}
+\uncover<6->{\textcolor{red}{These features aren't difficult: they're just our responsibility.}}
+\end{center}
 \end{frame}
 
 \begin{frame}{Machine learning and ansatz fitting}
