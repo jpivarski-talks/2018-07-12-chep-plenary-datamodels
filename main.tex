@@ -114,7 +114,12 @@ A better metric, which unfortunately I can't quantify:
 \textcolor{darkblue}{\underline{Option \#1}}
 
 \vspace{0.25 cm}
-Our needs are very specific. Continue developing our own everything.
+All of our needs are specialized.
+
+\vspace{0.25 cm}
+Continue developing our own everything.
+
+\vspace{1.75 cm}
 
 \column{0.25\linewidth}
 \begin{uncoverenv}<2->
@@ -137,12 +142,12 @@ Modern big data software has some good ideas; integrate those \underline{\it ide
 \textcolor{darkblue}{\hspace{-0.18 cm}\underline{Option \#4}}
 
 \vspace{0.25 cm}
-Promulgate the HEP way of doing analysis to bring the wider world up to our level of sophistication. Then they'll develop solutions for us.
+Convince the world to start using HEP analysis techniques so that they will develop solutions for these, too.
 \end{uncoverenv}
 \end{columns}
 
 \vspace{1 cm}
-\uncover<5->{\textcolor{red}{\#3 is my opinion, but it begs the question of where to draw the line.}}
+\uncover<5->{\textcolor{red}{\#3 is my opinion, but it begs the question: what's HEP-specific?}}
 \end{frame}
 
 \begin{frame}{Three examples each:}
@@ -194,11 +199,11 @@ Promulgate the HEP way of doing analysis to bring the wider world up to our leve
 \column{0.83\linewidth}
 DAG: Directed Acyclic Graph of dependencies between subtasks.
 
-In a common point of view, this is what big data processing \underline{\it is}.
+In popular opinion, this is what big data processing \underline{\it is}.
 
 \vspace{0.5 cm}
 \begin{uncoverenv}<2->
-Many projects distribute tasks this way:
+Many frameworks distribute work this way:
 
 \vspace{0.2 cm}
 \hfill \begin{minipage}{0.95\linewidth}
@@ -208,16 +213,16 @@ Many projects distribute tasks this way:
 
 \vspace{0.5 cm}
 \begin{uncoverenv}<3->
-To use these projects, one must
+To use these frameworks, one must
 \begin{itemize}
-\item express user tasks as DAG nodes (e.g.\ ROOT RDataFrame)
-\item serialize user functions on the driver and load user data on the workers, within the framework's environment
+\item express user tasks as DAG nodes (e.g.\ ROOT RDataFrame);
+\item serialize user functions on the driver and load user data on the workers as specified by the framework's way of doing things.
 \end{itemize}
 \end{uncoverenv}
 
 \vspace{0.5 cm}
 \begin{uncoverenv}<4->
-Spectrum of solutions from ``bare Spark'' to ``reimplement Spark.''
+Spectrum of choices from ``bare Spark'' to ``reimplement Spark.''
 \end{uncoverenv}
 \end{columns}
 \end{frame}
@@ -226,7 +231,7 @@ Spectrum of solutions from ``bare Spark'' to ``reimplement Spark.''
 \Large
 \vspace{0.5 cm}
 \begin{center}
-However, most analysis needs for DAG processing are pretty simple: one level of map (embarrassingly parallel event processing) and maybe one level of reduce (combining aggregations: hadd).
+However, most analysis needs for DAG processing are pretty simple: one level of {\tt\large map} (embarrassingly parallel event processing) and maybe one level of {\tt\large reduce} (combining aggregated data: {\tt\large hadd}).
 \end{center}
 \end{frame}
 
@@ -254,7 +259,7 @@ strangely HEP-specific
 Objects are essential in HEP analysis.
 
 \vspace{0.25 cm}
-Many physicists consider TTrees with {\tt\small std::vector<float>} branches ``minimal'' or ``flat.''
+Many physicists consider TTrees with {\tt\small std::vector<float>} branches to be ``minimal'' or ``flat.''
 \end{uncoverenv}
 
 \column{0.5\linewidth}
@@ -285,7 +290,7 @@ Most performance claims start the stopwatch after this ``data cleaning.''
 \begin{itemize}\setlength{\itemsep}{0.25 cm}
 \item<3-> \textcolor{darkblue}{Spark} DataFrames have arrays of structs, but using them involves a cumbersome explode-groupby or ``drop to RDDs,'' giving up performance.
 \item<4-> \textcolor{darkblue}{Parquet} and \textcolor{darkblue}{Arrow} have lists of records, but they haven't been implemented in C++ and therefore Python yet (last time I checked).
-\item<5-> \textcolor{darkblue}{HDF5} has lists of compounds, but these are rowwise and specialized.
+\item<5-> \textcolor{darkblue}{HDF5} has lists of compound types, but not an efficient implementation.
 \item<6-> \textcolor{darkblue}{Pandas} allows arbitrary Python objects in DataFrames, but most operations only apply to numbers.
 \end{itemize}
 \end{frame}
@@ -381,30 +386,35 @@ But that shouldn't be the only way: we {\it should} be able to use our data mode
 \hfill \includegraphics[height=1 cm]{awkward-logo.pdf}
 
 \vspace{-1 cm}
-My primary research: object access to columnar data.
+This is my main project: fast manipulation of columnar data.
 
+\vspace{0.25 cm}
 \scriptsize
-\begin{columns}
+\begin{columns}[t]
 \column{0.35\linewidth}
+\underline{\large General programming model}
+
 \begin{minted}{python}
-@numba.jit
-def mapfcn(event):
+@numba.jit            # JIT-compiles
+def deltaphi(event):
+    metphi = event.MET.phi
     for jet in event.jets:
-        yield event.phi - jet.phi
+        yield metphi - jet.phi
 \end{minted}
 
 \column{0.45\linewidth}
-\begin{minted}{python}
-event["phi"] - event["jet"]["phi"]
-\end{minted}
+\underline{\large Numpy-like broadcasting}
 
+\begin{minted}{python}
+# makes a copy of MET phi for each jet
+event["MET"]["phi"] - event["jet"]["phi"]
+\end{minted}
 \end{columns}
 
-
-
+\large
+\vspace{0.5 cm}
+This {\it ought} to be more general than HEP--- I'm in conversations with developers of Arrow, Dask, and XND ($\sim$Numpy 2.0) about these kinds of manipulations.
 \end{frame}
-
-
 
 \begin{frame}{}
 \huge
