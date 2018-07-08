@@ -180,26 +180,42 @@ Promulgate the HEP way of doing analysis to bring the wider world up to our leve
 \includegraphics[width=\linewidth]{dag-htcondor.png}
 
 \column{0.83\linewidth}
+DAG: Directed Acyclic Graph of dependencies between subtasks.
+
 In a common point of view, this is what big data processing \underline{\it is}.
 
 \vspace{0.5 cm}
-Many projects distribute work this way:
+\begin{uncoverenv}<2->
+Many projects distribute tasks this way:
 
 \vspace{0.2 cm}
 \hfill \begin{minipage}{0.95\linewidth}
 \textcolor{darkblue}{Spark} (JVM), \textcolor{darkblue}{Dask} and \textcolor{darkblue}{Joblib} (Python), \textcolor{darkblue}{Storm} (continuous), \textcolor{darkblue}{Thrill} (C++), \textcolor{darkblue}{DAGMan} (HTCondor), \textcolor{darkblue}{TensorFlow} (ML)\ldots
 \end{minipage}
+\end{uncoverenv}
 
 \vspace{0.5 cm}
+\begin{uncoverenv}<3->
 To use these projects, one must
 \begin{itemize}
 \item express user tasks as DAG nodes (e.g.\ ROOT RDataFrame)
 \item serialize user functions on the driver and load user data on the workers, within the framework's environment
 \end{itemize}
+\end{uncoverenv}
 
 \vspace{0.5 cm}
+\begin{uncoverenv}<4->
 Spectrum of solutions from ``bare Spark'' to ``reimplement Spark.''
+\end{uncoverenv}
 \end{columns}
+\end{frame}
+
+\begin{frame}{Distributed DAG processing}
+\Large
+\vspace{0.5 cm}
+\begin{center}
+However, most analysis needs for DAG processing are pretty simple: one level of map (embarrassingly parallel event processing) and maybe one level of reduce (combining aggregations: hadd).
+\end{center}
 \end{frame}
 
 \begin{frame}{Nested data structures}
