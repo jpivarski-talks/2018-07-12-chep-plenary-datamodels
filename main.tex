@@ -495,107 +495,108 @@ To the left is a PAW script (pre-ROOT), creating and filling histograms.
 
 \begin{frame}{From ``Pandas DataFrames for F.A.S.T.\ binned analysis at CMS''}
 \begin{center}
-\only<1>{\includegraphics[width=0.75\linewidth]{fast-slide-0.png}}\only<2>{\includegraphics[width=0.75\linewidth]{fast-slide-1.png}}\only<3>{\includegraphics[width=0.75\linewidth]{fast-slide-2.png}}
+\only<1>{\includegraphics[width=0.75\linewidth]{fast-slide-0.png}}\only<2>{\includegraphics[width=0.75\linewidth]{fast-slide-2.png}}
 \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Indexed analysis}
-\vspace{0.1 cm}
-\begin{columns}
-\column{1.09\linewidth}
-\begin{onlyenv}<1-2>Booking/filling mechanism with tree-like semantic index:
+\large
+\vspace{0.25 cm}
+I had the same thought: our prime example of indexable data are histograms and systems of related histograms. Indexing would let us project/rebin/cut/transform histograms more fluidly.
 
-\hfill \includegraphics[height=1 cm]{histbook-logo.pdf}
-
-\vspace{-1 cm}
+\vspace{0.25 cm}
+\begin{onlyenv}<1>
 \scriptsize
 \begin{minted}{python}
 >>> from histbook import *
->>> histograms = \
-...     ChannelsBook(
-...         mass = SamplesBook(["data", "signal", "background"],
-...                   SystematicsBook(Hist(bin("x", 5, 0, 5), systematic=[0]),
-...                                   Hist(bin("x + epsilon", 5, 0, 5), systematic=[1]),
-...                                   Hist(bin("x - epsilon", 5, 0, 5), systematic=[-1]))),
-...         mctruth = SamplesBook(["signal", "background"],
-...                         Book(param1=Hist(bin("param1", 5, 0, 5)),
-...                              param2=Hist(bin("param2", 5, 0, 5)))))
+>>> multihist = Hist(bin("mass", 100, 0, 500), cut("q1*q2 < 0"),
+...                  split("mt1", [0.2, 0.5]), split("mt2", [0.2, 0.5]), fill=df)
+>>> multihist.pandas()
 \end{minted}
-
-\normalsize
-defines $3\times 3 + 2\times2$ histograms and verifies that binning matches for systematic variations.
-
+\tiny
+\vspace{-0.25 cm}
+\begin{verbatim}
+                                                  count() err(count())
+mass           q1*q2 < 0 mt1         mt2
+[-inf, 0.0)    fail      [-inf, 0.2) [-inf, 0.2)      0.0          0.0
+                                     [0.2, 0.5)       0.0          0.0
+                                     [0.5, inf)       0.0          0.0
+                         [0.2, 0.5)  [-inf, 0.2)      0.0          0.0
+                                     [0.2, 0.5)       0.0          0.0
+                                     [0.5, inf)       0.0          0.0
+                         [0.5, inf)  [-inf, 0.2)      0.0          0.0
+                                     [0.2, 0.5)       0.0          0.0
+                                     [0.5, inf)       0.0          0.0
+               pass      [-inf, 0.2) [-inf, 0.2)      0.0          0.0
+                                     [0.2, 0.5)       0.0          0.0
+                                     [0.5, inf)       0.0          0.0
+                         [0.2, 0.5)  [-inf, 0.2)      0.0          0.0
+                                     [0.2, 0.5)       0.0          0.0
+                                     [0.5, inf)       0.0          0.0
+                         [0.5, inf)  [-inf, 0.2)      0.0          0.0
+                                     [0.2, 0.5)       0.0          0.0
+\end{verbatim}
+\end{onlyenv}
+\begin{onlyenv}<2>
 \scriptsize
-\begin{uncoverenv}<2->
 \begin{minted}{python}
->>> histograms.allkeys()
-['mass', 'mass/data', 'mass/data/0', 'mass/data/0/0', 'mass/data/0/1', 'mass/data/0/2',
- 'mass/signal', 'mass/signal/0', 'mass/signal/0/0', 'mass/signal/0/1', 'mass/signal/0/2',
- 'mass/background', 'mass/background/0', 'mass/background/0/0',  'mass/background/0/1',
- 'mass/background/0/2', 'mctruth', 'mctruth/signal', 'mctruth/signal/0',
- 'mctruth/signal/0/param2', 'mctruth/signal/0/param1', 'mctruth/background',
- 'mctruth/background/0', 'mctruth/background/0/param2', 'mctruth/background/0/param1']
+>>> from histbook import *
+>>> multihist = Hist(bin("mass", 100, 0, 500), cut("q1*q2 < 0"),
+...                  split("mt1", [0.2, 0.5]), split("mt2", [0.2, 0.5]), fill=df)
+>>> multihist.step("mass")
 \end{minted}
-\end{uncoverenv}
-\vspace{-0.7 cm}
+\mbox{ } \hfill \includegraphics[height=7 cm]{pandhist.pdf} \hfill \mbox{ }
 \end{onlyenv}
 \begin{onlyenv}<3>
 \scriptsize
 \begin{minted}{python}
->>> print(histograms["mass"])                   # print just the "mass" channel
-SamplesBook({
-    'data': Book({
-          '0': SystematicsBook({
-                '0': Hist(bin('x', 5, 0.0, 5.0)),
-                '1': Hist(bin('x + epsilon', 5, 0.0, 5.0)),
-                '2': Hist(bin('x - epsilon', 5, 0.0, 5.0))
-                })
-          }),
-    'signal': Book({
-          '0': SystematicsBook({
-                '0': Hist(bin('x', 5, 0.0, 5.0)),
-                '1': Hist(bin('x + epsilon', 5, 0.0, 5.0)),
-                '2': Hist(bin('x - epsilon', 5, 0.0, 5.0))
-                })
-          }),
-    'background': Book({
-          '0': SystematicsBook({
-                '0': Hist(bin('x', 5, 0.0, 5.0)),
-                '1': Hist(bin('x + epsilon', 5, 0.0, 5.0)),
-                '2': Hist(bin('x - epsilon', 5, 0.0, 5.0))
-                })
-          })})
+>>> from histbook import *
+>>> multihist = Hist(bin("mass", 100, 0, 500), cut("q1*q2 < 0"),
+...                  split("mt1", [0.2, 0.5]), split("mt2", [0.2, 0.5]), fill=df)
+>>> multihist.overlay("q1*q2 < 0").step("mass")
 \end{minted}
+\mbox{ } \hfill \includegraphics[height=7 cm]{pandhist_overlay.pdf} \hfill \mbox{ }
 \end{onlyenv}
 \begin{onlyenv}<4>
 \scriptsize
 \begin{minted}{python}
->>> print(histograms.view("*/signal/*"))        # select the subtree matching this pattern
-ViewBook({
-      'mass': ViewBook({
-            'signal': ViewBook({
-                  '0': ViewBook({
-                        '0': Hist(bin('x', 5, 0.0, 5.0)),
-                        '1': Hist(bin('x + epsilon', 5, 0.0, 5.0)),
-                        '2': Hist(bin('x - epsilon', 5, 0.0, 5.0))
-                        })
-                  })
-            }),
-      'mctruth': ViewBook({
-            'signal': ViewBook({
-                  '0': ViewBook({
-                        'param2': Hist(bin('param2', 5, 0.0, 5.0)),
-                        'param1': Hist(bin('param1', 5, 0.0, 5.0))
-                        })
-                  })
-            })
-      })
->>> histograms.view("*/data/*").fill(data)      # fill selectively
->>> histograms.view("*/signal/*").fill(signal)
->>> histograms.view("*/background/*").fill(background)
+>>> from histbook import *
+>>> multihist = Hist(bin("mass", 100, 0, 500), cut("q1*q2 < 0"),
+...                  split("mt1", [0.2, 0.5]), split("mt2", [0.2, 0.5]), fill=df)
+>>> multihist.stack("q1*q2 < 0").area("mass")
 \end{minted}
+\mbox{ } \hfill \includegraphics[height=7 cm]{pandhist_stack.pdf} \hfill \mbox{ }
 \end{onlyenv}
-\end{columns}
+\begin{onlyenv}<5>
+\scriptsize
+\begin{minted}{python}
+>>> from histbook import *
+>>> multihist = Hist(bin("mass", 100, 0, 500), cut("q1*q2 < 0"),
+...                  split("mt1", [0.2, 0.5]), split("mt2", [0.2, 0.5]), fill=df)
+>>> multihist.beside("q1*q2 < 0").step("mass")
+\end{minted}
+\mbox{ } \hfill \includegraphics[height=7 cm]{pandhist_trellis.pdf} \hfill \mbox{ }
+\end{onlyenv}
+\begin{onlyenv}<6>
+\scriptsize
+\begin{minted}{python}
+>>> from histbook import *
+>>> multihist = Hist(bin("mass", 100, 0, 500), cut("q1*q2 < 0"),
+...                  split("mt1", [0.2, 0.5]), split("mt2", [0.2, 0.5]), fill=df)
+>>> multihist.below("mt1").beside("mt2").step("mass")
+\end{minted}
+\mbox{ } \hfill \includegraphics[height=7 cm]{pandhist_double_trellis.pdf} \hfill \mbox{ }
+\end{onlyenv}
+\begin{onlyenv}<7>
+\scriptsize
+\begin{minted}{python}
+>>> from histbook import *
+>>> multihist = Hist(bin("mass", 100, 0, 500), cut("q1*q2 < 0"),
+...                  split("mt1", [0.2, 0.5]), split("mt2", [0.2, 0.5]), fill=df)
+>>> multihist.below("mt1").beside("mt2").overlay("q1*q2 < 0").step("mass")
+\end{minted}
+\mbox{ } \hfill \includegraphics[height=7 cm]{pandhist_double_trellis_overlay.pdf} \hfill \mbox{ }
+\end{onlyenv}
 \end{frame}
 
 \begin{frame}{Indexed analysis}
@@ -605,7 +606,108 @@ Using tools with rich indexing systemizes what we're doing with naming conventio
 
 \vspace{1 cm}
 Pandas is not a TTree replacement--- if anything, it's a histogram organizer!
+
+\vspace{1 cm}
 \end{frame}
+
+%% \begin{frame}[fragile]{Indexed analysis}
+%% \vspace{0.1 cm}
+%% \begin{columns}
+%% \column{1.09\linewidth}
+%% \begin{onlyenv}<1-2>Booking/filling mechanism with tree-like semantic index:
+
+%% \hfill \includegraphics[height=1 cm]{histbook-logo.pdf}
+
+%% \vspace{-1 cm}
+%% \scriptsize
+%% \begin{minted}{python}
+%% >>> from histbook import *
+%% >>> histograms = \
+%% ...     ChannelsBook(
+%% ...         mass = SamplesBook(["data", "signal", "background"],
+%% ...                   SystematicsBook(Hist(bin("x", 5, 0, 5), systematic=[0]),
+%% ...                                   Hist(bin("x + epsilon", 5, 0, 5), systematic=[1]),
+%% ...                                   Hist(bin("x - epsilon", 5, 0, 5), systematic=[-1]))),
+%% ...         mctruth = SamplesBook(["signal", "background"],
+%% ...                         Book(param1=Hist(bin("param1", 5, 0, 5)),
+%% ...                              param2=Hist(bin("param2", 5, 0, 5)))))
+%% \end{minted}
+
+%% \normalsize
+%% defines $3\times 3 + 2\times2$ histograms and verifies that binning matches for systematic variations.
+
+%% \scriptsize
+%% \begin{uncoverenv}<2->
+%% \begin{minted}{python}
+%% >>> histograms.allkeys()
+%% ['mass', 'mass/data', 'mass/data/0', 'mass/data/0/0', 'mass/data/0/1', 'mass/data/0/2',
+%%  'mass/signal', 'mass/signal/0', 'mass/signal/0/0', 'mass/signal/0/1', 'mass/signal/0/2',
+%%  'mass/background', 'mass/background/0', 'mass/background/0/0',  'mass/background/0/1',
+%%  'mass/background/0/2', 'mctruth', 'mctruth/signal', 'mctruth/signal/0',
+%%  'mctruth/signal/0/param2', 'mctruth/signal/0/param1', 'mctruth/background',
+%%  'mctruth/background/0', 'mctruth/background/0/param2', 'mctruth/background/0/param1']
+%% \end{minted}
+%% \end{uncoverenv}
+%% \vspace{-0.7 cm}
+%% \end{onlyenv}
+%% \begin{onlyenv}<3>
+%% \scriptsize
+%% \begin{minted}{python}
+%% >>> print(histograms["mass"])                   # print just the "mass" channel
+%% SamplesBook({
+%%     'data': Book({
+%%           '0': SystematicsBook({
+%%                 '0': Hist(bin('x', 5, 0.0, 5.0)),
+%%                 '1': Hist(bin('x + epsilon', 5, 0.0, 5.0)),
+%%                 '2': Hist(bin('x - epsilon', 5, 0.0, 5.0))
+%%                 })
+%%           }),
+%%     'signal': Book({
+%%           '0': SystematicsBook({
+%%                 '0': Hist(bin('x', 5, 0.0, 5.0)),
+%%                 '1': Hist(bin('x + epsilon', 5, 0.0, 5.0)),
+%%                 '2': Hist(bin('x - epsilon', 5, 0.0, 5.0))
+%%                 })
+%%           }),
+%%     'background': Book({
+%%           '0': SystematicsBook({
+%%                 '0': Hist(bin('x', 5, 0.0, 5.0)),
+%%                 '1': Hist(bin('x + epsilon', 5, 0.0, 5.0)),
+%%                 '2': Hist(bin('x - epsilon', 5, 0.0, 5.0))
+%%                 })
+%%           })})
+%% \end{minted}
+%% \end{onlyenv}
+%% \begin{onlyenv}<4>
+%% \scriptsize
+%% \begin{minted}{python}
+%% >>> print(histograms.view("*/signal/*"))        # select the subtree matching this pattern
+%% ViewBook({
+%%       'mass': ViewBook({
+%%             'signal': ViewBook({
+%%                   '0': ViewBook({
+%%                         '0': Hist(bin('x', 5, 0.0, 5.0)),
+%%                         '1': Hist(bin('x + epsilon', 5, 0.0, 5.0)),
+%%                         '2': Hist(bin('x - epsilon', 5, 0.0, 5.0))
+%%                         })
+%%                   })
+%%             }),
+%%       'mctruth': ViewBook({
+%%             'signal': ViewBook({
+%%                   '0': ViewBook({
+%%                         'param2': Hist(bin('param2', 5, 0.0, 5.0)),
+%%                         'param1': Hist(bin('param1', 5, 0.0, 5.0))
+%%                         })
+%%                   })
+%%             })
+%%       })
+%% >>> histograms.view("*/data/*").fill(data)      # fill selectively
+%% >>> histograms.view("*/signal/*").fill(signal)
+%% >>> histograms.view("*/background/*").fill(background)
+%% \end{minted}
+%% \end{onlyenv}
+%% \end{columns}
+%% \end{frame}
 
 \begin{frame}{}
 \huge
