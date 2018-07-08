@@ -371,7 +371,34 @@ In some cases, maybe we're using the wrong idiom: instead of working with struct
 \vspace{5 cm}
 \end{frame}
 
-\begin{frame}{Nested data structures}
+\begin{frame}[fragile]{Nested data structures}
+\Large
+\vspace{0.5 cm}
+But that shouldn't be the only way: we {\it should} be able to use our data models and algorithms, even if we run them in workflow managers from the wider community.
+
+\large
+\vspace{0.5 cm}
+\hfill \includegraphics[height=1 cm]{awkward-logo.pdf}
+
+\vspace{-1 cm}
+My primary research: object access to columnar data.
+
+\scriptsize
+\begin{columns}
+\column{0.35\linewidth}
+\begin{minted}{python}
+@numba.jit
+def mapfcn(event):
+    for jet in event.jets:
+        yield event.phi - jet.phi
+\end{minted}
+
+\column{0.45\linewidth}
+\begin{minted}{python}
+event["phi"] - event["jet"]["phi"]
+\end{minted}
+
+\end{columns}
 
 
 
