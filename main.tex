@@ -31,7 +31,7 @@
 \definecolor{darkgreen}{rgb}{0,0.6,0}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-\title[2018-07-12-chep-plenary-datamodels]{Data analysis tooling from within HEP and from industry}
+\title[2018-07-12-chep-plenary-datamodels]{Data analysis tools from within HEP and from industry}
 \author{Jim Pivarski}
 \institute{Princeton University -- DIANA-HEP}
 \date{July 12, 2018}
@@ -74,7 +74,7 @@ I'm going to start with a dumb comparison, to make a point.
 \vspace{0.5 cm}
 HEP is no longer the main user or developer in this problem space.
 
-\vspace{1 cm}
+\vspace{0.5 cm}
 \begin{uncoverenv}<2->
 A better metric, which unfortunately I can't quantify:
 \begin{itemize}
@@ -86,6 +86,12 @@ A better metric, which unfortunately I can't quantify:
 
 \vspace{0.5 cm}
 \uncover<3->{$\to$ there's a lot of good data analysis software out there!}
+
+\uncover<4->{\textcolor{white}{$\to$} $\to$ reduce in-house maintenance burden}
+
+\uncover<5->{\textcolor{white}{$\to$} \textcolor{white}{$\to$} $\to$ provides more training and career options to users}
+
+\mbox{ }
 \end{frame}
 
 \begin{frame}{Another very important metric}
@@ -147,7 +153,7 @@ Convince the world to start using HEP analysis techniques so that they will deve
 \end{columns}
 
 \vspace{1 cm}
-\uncover<5->{\textcolor{red}{\#3 is my opinion, but it begs the question: what's HEP-specific?}}
+\uncover<5->{\textcolor{red}{\#3 is my opinion, but it begs the question: what's HEP-specific and what's not?}}
 \end{frame}
 
 \begin{frame}{Three examples each:}
@@ -227,14 +233,6 @@ Spectrum of choices from ``bare Spark'' to ``reimplement Spark.''
 \end{columns}
 \end{frame}
 
-\begin{frame}{Distributed DAG processing}
-\Large
-\vspace{0.5 cm}
-\begin{center}
-However, most analysis needs for DAG processing are pretty simple: one level of {\tt\large map} (embarrassingly parallel event processing) and maybe one level of {\tt\large reduce} (combining aggregated data: {\tt\large hadd}).
-\end{center}
-\end{frame}
-
 \begin{frame}{}
 \huge
 \vspace{0.5 cm}
@@ -290,7 +288,7 @@ Most performance claims start the stopwatch after this ``data cleaning.''
 \begin{itemize}\setlength{\itemsep}{0.25 cm}
 \item<3-> \textcolor{darkblue}{Spark} DataFrames have arrays of structs, but using them involves a cumbersome explode-groupby or ``drop to RDDs,'' giving up performance.
 \item<4-> \textcolor{darkblue}{Parquet} and \textcolor{darkblue}{Arrow} have lists of records, but they haven't been implemented in C++ and therefore Python yet (last time I checked).
-\item<5-> \textcolor{darkblue}{HDF5} has lists of compound types, but not an efficient implementation.
+\item<5-> \textcolor{darkblue}{HDF5} has lists of compound types, but only as rowwise records.
 \item<6-> \textcolor{darkblue}{Pandas} allows arbitrary Python objects in DataFrames, but most operations only apply to numbers.
 \end{itemize}
 \end{frame}
@@ -413,7 +411,7 @@ event["MET"]["phi"] - event["jet"]["phi"]
 
 \large
 \vspace{0.5 cm}
-This {\it ought} to be more general than HEP--- I'm in conversations with developers of Arrow, Dask, and XND ($\sim$Numpy 2.0) about these kinds of manipulations.
+This {\it ought} to be of wider interest than HEP--- I'm in conversations with developers of Arrow, Dask, and XND ($\sim$Numpy 2.0) about the above.
 \end{frame}
 
 \begin{frame}{}
@@ -489,7 +487,7 @@ To the left is a PAW script (pre-ROOT), creating and filling histograms.
 \uncover<2->{{\bf Acquiring the ability to name stuff was as fundamental to HEP data analysis as handwashing was to medical science!}}
 
 \vspace{0.75 cm}
-\uncover<3->{But we don't have to stop there. There's more to indexing than key-value pairs.}
+\uncover<3->{But we don't have to stop there. There's more to indexing than name-value pairs.}
 \end{columns}
 \end{frame}
 
