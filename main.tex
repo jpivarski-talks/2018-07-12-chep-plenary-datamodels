@@ -395,7 +395,7 @@ This is my main project: fast manipulation of columnar data.
 \underline{\large General programming model}
 
 \begin{minted}{python}
-@numba.jit            # JIT-compiles
+@numba.jit    # JIT-compiles Python
 def deltaphi(event):
     metphi = event.MET.phi
     for jet in event.jets:
@@ -746,9 +746,61 @@ very HEP-specific
 \end{frame}
 
 \begin{frame}{Machine learning versus ansatz fitting}
+\Large
+\vspace{0.5 cm}
+\textcolor{darkblue}{Demystifying machine learning:} it's fitting.
+
+\large
+\vspace{0.5 cm}
+\uncover<2->{It's fitting with thousands of free parameters, where the goal is not to find a global minimum or understand the limiting value of those parameters, but to generate, recognize, or classify similar patterns.}
+
+\vspace{0.5 cm}
+\uncover<3->{By contrast, traditional HEP fitting optimizes a theory-driven function of few parameters, and their optimal values have implications for the theory.}
+
+\vspace{0.5 cm}
+\uncover<4->{\textcolor{darkblue}{They have different purposes and are therefore both useful.}}
+
+\vspace{0.5 cm}
+\uncover<5->{While machine learning is very active outside of HEP, the best ansatz fitting tools are found in HEP: RooFit, RooStats, GooFit, HistFitter, HistFactory, pyhf\ldots}
 \end{frame}
 
+\begin{frame}{Areas of overlap}
+\Large
+\vspace{1 cm}
+\begin{columns}[t]
+\column{0.5\linewidth}
+\mbox{\hspace{0.25 cm}\underline{What they've got}}
+
+\vspace{0.25 cm}
+\begin{enumerate}
+\item \only<1-3>{Distributed DAG processing}\only<4>{\textcolor{red}{Distributed DAG processing}}
+\item \only<1>{Indexed analysis}\only<2>{\textcolor{red}{Indexed analysis}}\only<3-4>{Indexed analysis}
+\item \only<1-2>{Machine learning}\only<3>{\textcolor{red}{Machine learning}}\only<4>{Machine learning}
+\end{enumerate}
+
+\column{0.5\linewidth}
+\mbox{\hspace{0.45 cm}\underline{What we'd need}}
+
+\vspace{0.25 cm}
+\begin{enumerate}
+\item \only<1-2>{Nested data structures}\only<3>{\textcolor{red}{Nested data structures}}\only<4>{Nested data structures}
+\item \only<1>{Advanced histogramming}\only<2>{\textcolor{red}{Advanced histogramming}}\only<3-4>{Advanced histogramming}
+\item \only<1-3>{Ansatz fitting}\only<4>{\textcolor{red}{Ansatz fitting}}
+\end{enumerate}
+\end{columns}
+
+\large
+\vspace{1 cm}
+\only<1>{\vspace{4\baselineskip}}\only<2>{\textcolor{red}{F.A.S.T.\ and histbook are incorporating Pandas indexing into advanced histogramming.}\vspace{2\baselineskip}}\only<3>{\textcolor{red}{Nearly all ML techniques require flattened or sequences of flattened data.} \\ For instance, to train on $N_i$ jets in each event $i$ (nested, unordered sets), we either truncate the number of jets or use RNNs or LSTMs (for non-nested, ordered sequences).}\only<4>{\textcolor{red}{As fits get bigger, they may need to be distributed, for instance in iterative map-reduce.}\vspace{2\baselineskip}}
+
+\mbox{ }
+\end{frame}
+
+\begin{frame}{Conclusions}
+\Large
+\vspace{0.5 cm}
 
 
+\end{frame}
 
 \end{document}
