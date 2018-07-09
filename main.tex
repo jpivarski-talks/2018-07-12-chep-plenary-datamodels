@@ -754,7 +754,7 @@ very HEP-specific
 
 \large
 \vspace{0.5 cm}
-\uncover<2->{It's fitting with thousands of free parameters, where the goal is not to find a global minimum or understand the limiting value of those parameters, but to generate, recognize, or classify similar patterns.}
+\uncover<2->{It's fitting with thousands of free parameters, where the goal is not to find a global minimum or understand the limiting value of those parameters, but to generate, recognize, or classify patterns.}
 
 \vspace{0.5 cm}
 \uncover<3->{By contrast, traditional HEP fitting optimizes a theory-driven function of few parameters, and their optimal values have implications for the theory.}
@@ -763,7 +763,7 @@ very HEP-specific
 \uncover<4->{\textcolor{darkblue}{They have different purposes and are therefore both useful.}}
 
 \vspace{0.5 cm}
-\uncover<5->{While machine learning is very active outside of HEP, the best ansatz fitting tools are found in HEP: RooFit, RooStats, GooFit, HistFitter, HistFactory, pyhf\ldots}
+\uncover<5->{We can look to industry for machine learning innovations, but the best ansatz fitters are in HEP: RooFit, RooStats, GooFit, HistFitter, HistFactory, pyhf\ldots}
 \end{frame}
 
 \begin{frame}{Areas of overlap}
@@ -793,23 +793,29 @@ very HEP-specific
 
 \large
 \vspace{1 cm}
-\only<1>{\mbox{ }\vspace{3\baselineskip}}\only<2>{\textcolor{red}{F.A.S.T.\ and histbook are incorporating Pandas indexing into advanced histogramming.}\vspace{2\baselineskip}}\only<3>{\textcolor{red}{Nearly all ML techniques require flattened or sequences of flattened data.} \\ For instance, to train on $N_i$ jets in each event $i$ (nested, unordered sets), we either truncate the number of jets or use RNNs or LSTMs (for non-nested, ordered sequences).}\only<4>{\textcolor{red}{As fits get bigger, they may need to be distributed, for instance in iterative map-reduce.}\vspace{2\baselineskip}}
+\only<1>{\mbox{ }\vspace{3\baselineskip}}\only<2>{\textcolor{red}{F.A.S.T.\ and histbook are incorporating Pandas indexing into advanced histogramming.}\vspace{2\baselineskip}}\only<3>{\textcolor{red}{Nearly all ML techniques require flattened or sequences of flattened data.} \\ For instance, to train on $N_i$ jets in each event $i$ (nested, unordered sets), we either truncate the number of jets or use RNNs or LSTMs (for non-nested, ordered sequences).}\only<4>{\textcolor{red}{As fits get bigger, they may need to be distributed, for instance with iterative map-reduce.}\vspace{2\baselineskip}}
 
 \mbox{ }
 \end{frame}
 
 \begin{frame}{Conclusions}
 \Large
-\vspace{0.5 cm}
+\vspace{0.75 cm}
 Data analysis tools outside of HEP are mature but not a perfect fit to our needs.
 
 \vspace{0.25 cm}
 \begin{columns}
 \column{1.05\linewidth}
 \begin{itemize}\setlength{\itemsep}{0.25 cm}
-\item Some of what we need is available now, with no maintenance cost.
+\item Some of what we need is available now: let's use it!
 \item Some exists only as HEP software: can we integrate these pieces with big data tools from beyond HEP?
-\item Some of what's available is unlike anything we do now: an opportunity to gain from new techniques?
+\item Some of what's available is unlike anything we do now: an opportunity to learn from new techniques?
+
+\begin{itemize}
+\item<2-> {\large beyond just machine learning\ldots}
+\end{itemize}
+
+\mbox{ }
 \end{itemize}
 \end{columns}
 \end{frame}
