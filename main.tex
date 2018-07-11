@@ -848,7 +848,7 @@ The histograms themselves, however, are more sophisticated in HEP than elsewhere
 
 \large
 \vspace{1 cm}
-\only<1>{\mbox{ }\vspace{3\baselineskip}}\only<2>{\textcolor{darkorange}{\bf F.A.S.T.\ and histbook are incorporating Pandas indexing into advanced histogramming.}\vspace{2\baselineskip}}\only<3>{\textcolor{darkorange}{\bf Nearly all ML techniques require flattened or sequences of flattened data.} \\ For instance, to train on $N_i$ jets in each event $i$ (nested, unordered sets), we either truncate the number of jets or use RNNs or LSTMs (for non-nested, ordered sequences). {\it Surely it would help to train on the right data type!}}\only<4>{\textcolor{darkorange}{\bf As fits get bigger, they may need to be distributed, for instance with iterative map-reduce.}\vspace{2\baselineskip}}
+\only<1>{\mbox{ }\vspace{3\baselineskip}}\only<2>{\textcolor{darkorange}{\bf F.A.S.T.\ and histbook are incorporating Pandas indexing into advanced histogramming.}\vspace{2\baselineskip}}\only<3>{\textcolor{darkorange}{\bf Nearly all ML techniques require flattened or sequences of flattened data,} \\ but we have real problems that need nested data: e.g.\ classifying $N_i$ jets per event (nested, unordered sets). RNNs and LSTMs (for non-nested, ordered sequences) are designed for a different data type!}\only<4>{\textcolor{darkorange}{\bf As fits get bigger, they may need to be distributed, for instance with iterative map-reduce.}\vspace{2\baselineskip}}
 
 \mbox{ }
 \end{columns}
