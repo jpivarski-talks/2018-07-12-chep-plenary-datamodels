@@ -489,38 +489,38 @@ analysis with \underline{\it less advanced indexing} than modern HEP.
 \column{0.5\linewidth}
 \tiny
 \begin{Verbatim}[commandchars=\\\{\}]
-h/cr/1d \textcolor{red}{201} 'd0miss' 100 -0.5e-3 0.5e-3
-h/cr/1d \textcolor{red}{202} 'z0miss' 100 -0.015 0.015
-h/cr/1d \textcolor{red}{203} 'pxmiss' 100 -0.076 0.076
-h/cr/1d \textcolor{red}{204} 'pymiss' 100 -0.076 0.076
-h/cr/1d \textcolor{red}{205} 'pzmiss' 100 -0.076 0.076
-nt/plot 2.d0 ! ! ! ! ! \textcolor{red}{201}
-nt/plot 2.z0 ! ! ! ! ! \textcolor{red}{202}
-nt/plot 2.px ! ! ! ! ! \textcolor{red}{203}
-nt/plot 2.py ! ! ! ! ! \textcolor{red}{204}
-nt/plot 2.pz ! ! ! ! ! \textcolor{red}{205}
+h/cr/1d \textcolor{blue}{\bf201} 'd0miss' 100 -0.5e-3 0.5e-3
+h/cr/1d \textcolor{blue}{\bf202} 'z0miss' 100 -0.015 0.015
+h/cr/1d \textcolor{blue}{\bf203} 'pxmiss' 100 -0.076 0.076
+h/cr/1d \textcolor{blue}{\bf204} 'pymiss' 100 -0.076 0.076
+h/cr/1d \textcolor{blue}{\bf205} 'pzmiss' 100 -0.076 0.076
+nt/plot 2.d0 ! ! ! ! ! \textcolor{blue}{\bf201}
+nt/plot 2.z0 ! ! ! ! ! \textcolor{blue}{\bf202}
+nt/plot 2.px ! ! ! ! ! \textcolor{blue}{\bf203}
+nt/plot 2.py ! ! ! ! ! \textcolor{blue}{\bf204}
+nt/plot 2.pz ! ! ! ! ! \textcolor{blue}{\bf205}
 
-h/cr/1d \textcolor{red}{301} 'normalized d0miss' 100 -10 10
-h/cr/1d \textcolor{red}{302} 'normalized z0miss' 100 -10 10
-h/cr/1d \textcolor{red}{303} 'normalized pxmiss' 100 -10 10
-h/cr/1d \textcolor{red}{304} 'normalized pymiss' 100 -10 10
-h/cr/1d \textcolor{red}{305} 'normalized pzmiss' 100 -10 10
-nt/plot 2.d0/sqrt(ed0) ! ! ! ! ! \textcolor{red}{301}
-nt/plot 2.z0/sqrt(ez0) ! ! ! ! ! \textcolor{red}{302}
-nt/plot 2.px/sqrt(epx) ! ! ! ! ! \textcolor{red}{303}
-nt/plot 2.py/sqrt(epy) ! ! ! ! ! \textcolor{red}{304}
-nt/plot 2.pz/sqrt(epz) ! ! ! ! ! \textcolor{red}{305}
+h/cr/1d \textcolor{blue}{\bf301} 'normalized d0miss' 100 -10 10
+h/cr/1d \textcolor{blue}{\bf302} 'normalized z0miss' 100 -10 10
+h/cr/1d \textcolor{blue}{\bf303} 'normalized pxmiss' 100 -10 10
+h/cr/1d \textcolor{blue}{\bf304} 'normalized pymiss' 100 -10 10
+h/cr/1d \textcolor{blue}{\bf305} 'normalized pzmiss' 100 -10 10
+nt/plot 2.d0/sqrt(ed0) ! ! ! ! ! \textcolor{blue}{\bf301}
+nt/plot 2.z0/sqrt(ez0) ! ! ! ! ! \textcolor{blue}{\bf302}
+nt/plot 2.px/sqrt(epx) ! ! ! ! ! \textcolor{blue}{\bf303}
+nt/plot 2.py/sqrt(epy) ! ! ! ! ! \textcolor{blue}{\bf304}
+nt/plot 2.pz/sqrt(epz) ! ! ! ! ! \textcolor{blue}{\bf305}
 
-h/cr/1d \textcolor{red}{401} 'd0miss after constraint' 100 -0.1e-16 0.1e-16
-h/cr/1d \textcolor{red}{402} 'z0miss after constraint' 100 -0.1e-15 0.1e-15
-h/cr/1d \textcolor{red}{403} 'pxmiss after constraint' 100 -0.01 0.01
-h/cr/1d \textcolor{red}{404} 'pymiss after constraint' 100 -0.01 0.01
-h/cr/1d \textcolor{red}{405} 'pzmiss after constraint' 100 -0.01 0.01
-nt/plot 2.ad0 ! ! ! ! ! \textcolor{red}{401}
-nt/plot 2.az0 ! ! ! ! ! \textcolor{red}{402}
-nt/plot 2.apx ! ! ! ! ! \textcolor{red}{403}
-nt/plot 2.apy ! ! ! ! ! \textcolor{red}{404}
-nt/plot 2.apz ! ! ! ! ! \textcolor{red}{405}
+h/cr/1d \textcolor{blue}{\bf401} 'd0miss after constraint' 100 -0.1e-16 0.1e-16
+h/cr/1d \textcolor{blue}{\bf402} 'z0miss after constraint' 100 -0.1e-15 0.1e-15
+h/cr/1d \textcolor{blue}{\bf403} 'pxmiss after constraint' 100 -0.01 0.01
+h/cr/1d \textcolor{blue}{\bf404} 'pymiss after constraint' 100 -0.01 0.01
+h/cr/1d \textcolor{blue}{\bf405} 'pzmiss after constraint' 100 -0.01 0.01
+nt/plot 2.ad0 ! ! ! ! ! \textcolor{blue}{\bf401}
+nt/plot 2.az0 ! ! ! ! ! \textcolor{blue}{\bf402}
+nt/plot 2.apx ! ! ! ! ! \textcolor{blue}{\bf403}
+nt/plot 2.apy ! ! ! ! ! \textcolor{blue}{\bf404}
+nt/plot 2.apz ! ! ! ! ! \textcolor{blue}{\bf405}
 \end{Verbatim}
 
 \column{0.01\linewidth}
@@ -529,10 +529,10 @@ nt/plot 2.apz ! ! ! ! ! \textcolor{red}{405}
 To the left is a PAW script (pre-ROOT), creating and filling histograms.
 
 \vspace{0.75 cm}
-\textcolor{red}{They must be identified by integers because histograms didn't have \underline{\it names} back then.}
+\textcolor{blue}{Histograms were Indexed by integers because they didn't have \underline{\it names} back then.}
 
 \vspace{0.75 cm}
-\uncover<2->{{\bf Acquiring the ability to name stuff was as fundamental to HEP data analysis as handwashing was to medical science!}}
+\uncover<2->{\textcolor{darkorange}{\bf The ability to name stuff was as fundamental to HEP data analysis as handwashing was to medical science!}}
 
 \vspace{0.75 cm}
 \uncover<3->{But we don't have to stop there. There's more to indexing than name-value pairs.}
@@ -655,7 +655,9 @@ mass           q1*q2 < 0 mt1         mt2
 Using tools with rich indexing systemizes what we're doing with naming conventions, splitting histogram names on underscores, etc.
 
 \vspace{1 cm}
-Pandas is not a TTree replacement--- if anything, it's a histogram organizer!
+\begin{center}
+\textcolor{darkblue}{Pandas is not a TTree replacement--- if anything,\\it's a histogram organizer!}
+\end{center}
 
 \vspace{1 cm}
 \end{frame}
@@ -809,7 +811,7 @@ The histograms themselves, however, are more sophisticated in HEP than elsewhere
 \uncover<3->{Traditional ansatz fitting, however, optimizes a theory-driven function of few parameters, and the shape of the minimum has implications for the theory.}
 
 \vspace{0.5 cm}
-\uncover<4->{\textcolor{darkblue}{\Large Qualitatively different purposes:} \textcolor{darkorange}{\bf both needed.}}
+\uncover<4->{\textcolor{darkblue}{\Large Qualitatively different purposes:} \textcolor{darkorange}{\Large\bf both needed.}}
 
 \vspace{0.5 cm}
 \uncover<5->{We can look to industry for machine learning innovations, but the best ansatz fitters are in HEP: RooFit, RooStats, GooFit, HistFitter, HistFactory, pyhf\ldots}
