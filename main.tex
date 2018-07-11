@@ -770,18 +770,19 @@ very HEP-specific
 \end{frame}
 
 \begin{frame}{Advanced histogramming}
-\large
+\Large
 \vspace{0.5 cm}
-{\Large The histograms themselves, however, are more sophisticated in HEP than elsewhere.}
-\vspace{0.25 cm}
-\begin{itemize}\setlength{\itemsep}{0.25 cm}
-\item<2-> As far as I have found, HEP histogramming tools (ROOT, YODA, AIDA, HippoDraw, Jas3, mn\_fit, PAW, HBOOK) are \underline{\it unique} in conceiving of a histogram as a container to be filled, merged, and accessed programmatically.
+The histograms themselves, however, are more sophisticated in HEP than elsewhere.
+
+\large
+\vspace{0.35 cm}
+\begin{itemize}\setlength{\itemsep}{0.35 cm}
+\item<2-> As far as I have found, HEP histogramming tools \textcolor{gray}{(ROOT, YODA, AIDA, HippoDraw, Jas3, mn\_fit, PAW, HBOOK)} are \underline{\it unique} in conceiving of a histogram as a container to be filled, merged, and accessed programmatically.
 \item<3-> In many non-HEP packages, ``histogram'' is more of a display option than an analysis tool, with no way to access contents or control binning.
-\item<4-> Only HEP tools have ``profile'' histograms--- functions of dependent variables, in addition to distributions on independent variables.
-\item<5-> Log-scale support is often weak in non-HEP graphics packages, particularly for empty bins.
+\item<4-> Only in HEP: ``profile'' plots.
 \end{itemize}
 \begin{center}
-\uncover<6->{\textcolor{red}{These features aren't difficult, but they're our responsibility.}}
+\uncover<5->{\textcolor{red}{These features aren't difficult, but they're our responsibility.}}
 \end{center}
 \end{frame}
 
@@ -796,17 +797,17 @@ very HEP-specific
 \begin{frame}{Machine learning versus ansatz fitting}
 \Large
 \vspace{0.5 cm}
-\textcolor{darkblue}{Demystifying machine learning:} it's fitting.
+\textcolor{darkblue}{My take on machine learning:} \textcolor{darkorange}{\bf it's fitting.}
 
 \large
 \vspace{0.5 cm}
 \uncover<2->{It's fitting with thousands of free parameters, where the goal is not to find a global minimum or understand the limiting value of those parameters, but to generate, recognize, or classify patterns.}
 
 \vspace{0.5 cm}
-\uncover<3->{By contrast, traditional HEP fitting optimizes a theory-driven function of few parameters, and their optimal values have implications for the theory.}
+\uncover<3->{Traditional ansatz fitting, however, optimizes a theory-driven function of few parameters, and the shape of the minimum has implications for the theory.}
 
 \vspace{0.5 cm}
-\uncover<4->{\textcolor{darkblue}{They have different purposes and are therefore both useful.}}
+\uncover<4->{\textcolor{darkblue}{\Large Qualitatively different purposes:} \textcolor{darkorange}{\bf both needed.}}
 
 \vspace{0.5 cm}
 \uncover<5->{We can look to industry for machine learning innovations, but the best ansatz fitters are in HEP: RooFit, RooStats, GooFit, HistFitter, HistFactory, pyhf\ldots}
@@ -849,13 +850,13 @@ very HEP-specific
 \vspace{0.75 cm}
 Data analysis tools outside of HEP are mature but not a perfect fit to our needs.
 
-\vspace{0.25 cm}
+\vspace{0.35 cm}
 \begin{columns}
 \column{1.05\linewidth}
-\begin{itemize}\setlength{\itemsep}{0.25 cm}
+\begin{itemize}\setlength{\itemsep}{0.35 cm}
 \item Some of what we need is available now: let's use it!
-\item Some exists only as HEP software: can we integrate these pieces with big data tools from beyond HEP?
-\item Some of what's available is unlike anything we do now: an opportunity to learn from new techniques?
+\item Some exists only as HEP software: can we integrate them?
+\item Some of what's available is unlike anything we do now: an opportunity to do better physics?
 
 \begin{itemize}
 \item<2-> {\large beyond just machine learning, that is\ldots}
