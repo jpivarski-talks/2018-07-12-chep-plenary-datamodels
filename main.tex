@@ -87,11 +87,22 @@ A better metric, which unfortunately I can't quantify:
 \vspace{0.5 cm}
 \uncover<3->{$\to$ there's a lot of good data analysis software out there!}
 
-\uncover<4->{\textcolor{white}{$\to$} $\to$ reduce in-house maintenance burden}
+\uncover<4->{\textcolor{white}{$\to$} $\to$ reduce in-house maintenance burden?}
 
-\uncover<5->{\textcolor{white}{$\to$} \textcolor{white}{$\to$} $\to$ provides more training and career options to users}
+\uncover<5->{\textcolor{white}{$\to$} \textcolor{white}{$\to$} $\to$ more training examples and career options for users?}
 
 \mbox{ }
+\end{frame}
+
+\begin{frame}{Show of hands}
+\huge
+\vspace{0.5 cm}
+\begin{center}
+Are you currently using \textcolor{darkblue}{data analysis software} created outside of HEP?
+
+\vspace{1 cm}
+\uncover<2->{Are you planning to or want to?}
+\end{center}
 \end{frame}
 
 \begin{frame}{Another very important metric}
@@ -112,7 +123,7 @@ A better metric, which unfortunately I can't quantify:
 \uncover<4->{without some necessary tools.}
 \end{frame}
 
-\begin{frame}{Reactions?}
+\begin{frame}{Response?}
 \large
 \vspace{0.5 cm}
 \begin{columns}[t]
@@ -205,7 +216,7 @@ not HEP-specific
 \column{0.83\linewidth}
 DAG: Directed Acyclic Graph of dependencies between subtasks.
 
-In popular opinion, this is what big data processing \underline{\it is}.
+Some would say this is what big data processing \underline{\it is}.
 
 \vspace{0.5 cm}
 \begin{uncoverenv}<2->
@@ -224,11 +235,6 @@ To use these frameworks, one must
 \item express user tasks as DAG nodes (e.g.\ ROOT RDataFrame);
 \item serialize user functions on the driver and load user data on the workers in accordance to the framework's way of doing things.
 \end{itemize}
-\end{uncoverenv}
-
-\vspace{0.5 cm}
-\begin{uncoverenv}<4->
-Spectrum of choices from ``bare Spark'' to ``reimplement Spark.''
 \end{uncoverenv}
 \end{columns}
 \end{frame}
@@ -425,6 +431,22 @@ event["MET"]["phi"] - event["jet"]["phi"]
 \vspace{0.5 cm}
 This {\it ought} to be of wider interest than HEP--- I'm in conversations with developers of Arrow, Dask, and XND ($\sim$Numpy 2.0) about the above.
 \end{frame}
+
+\begin{frame}{Missed opportunity}
+\begin{center}
+\only<1>{\includegraphics[width=\linewidth]{history.pdf}}\only<2->{\includegraphics[width=0.7\linewidth]{history.pdf}}
+\end{center}
+\begin{uncoverenv}<2->
+\begin{columns}
+\column{0.43\linewidth}
+\Large \hfill Google Dremel paper (2010):
+\column{0.65\linewidth}
+\includegraphics[width=\linewidth]{dremel-paper-cropped.png}
+\end{columns}
+\end{uncoverenv}
+\end{frame}
+
+
 
 \begin{frame}{}
 \huge
