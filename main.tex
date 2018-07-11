@@ -401,25 +401,25 @@ entry subentry
 \end{frame}
 
 \begin{frame}[fragile]{Nested data structures}
-\Large
-\vspace{0.5 cm}
-But that shouldn't be the only way: we {\it should} be able to use our data models and algorithms, even if we run them in workflow managers from the wider community.
-
 \large
+\vspace{0.4 cm}
+But that shouldn't be the only way: we {\it should} be able to use our data models and algorithms, even if we run them in non-HEP frameworks.
+
+\begin{uncoverenv}<2->
 \vspace{0.5 cm}
 \hfill \includegraphics[height=1 cm]{awkward-logo.pdf}
 
 \vspace{-1 cm}
-This is my main project: fast manipulation of columnar data.
+This is my main project: \textcolor{darkblue}{\underline{fast manipulation of columnar data.}}
 
-\vspace{0.25 cm}
+\vspace{0.5 cm}
 \scriptsize
 \begin{columns}[t]
 \column{0.35\linewidth}
 \underline{\large General programming model}
 
 \begin{minted}{python}
-@numba.jit    # JIT-compiles Python
+@numba.jit    # LLVM-compiled Python
 def deltaphi(event):
     metphi = event.MET.phi
     for jet in event.jets:
@@ -429,15 +429,17 @@ def deltaphi(event):
 \column{0.45\linewidth}
 \underline{\large Numpy-like broadcasting}
 
+\vspace{\baselineskip}
 \begin{minted}{python}
-# makes a copy of MET phi for each jet
+# one per event       one per particle
 event["MET"]["phi"] - event["jet"]["phi"]
 \end{minted}
 \end{columns}
+\end{uncoverenv}
 
 \large
-\vspace{0.5 cm}
-This {\it ought} to be of wider interest than HEP--- I'm in conversations with developers of Arrow, Dask, and XND ($\sim$Numpy 2.0) about the above.
+\vspace{0.7 cm}
+\uncover<3->{Also, this {\it should} be of wider interest than HEP: I'm in conversations with developers of Arrow, Dask, and XND ($\sim$Numpy 2.0) about it.}
 \end{frame}
 
 \begin{frame}{Missed opportunity}
