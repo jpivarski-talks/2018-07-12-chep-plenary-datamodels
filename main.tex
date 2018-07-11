@@ -306,16 +306,17 @@ Performance claims often start the stopwatch after this ``data cleaning.''
 \large
 \vspace{0.5 cm}
 \begin{tikzpicture}[>=latex]
-\node[rectangle callout, draw, inner sep=5 pt, callout relative pointer={(200:1 cm)}, text width=0.43\linewidth] {\large But Spark/Parquet/Arrow/Pandas has nested objects!};
+\node[rectangle callout, draw, inner sep=5 pt, callout relative pointer={(200:1 cm)}, text width=0.46\linewidth] {\large Spark/Parquet/Arrow/HDF5/Pandas has nested objects!};
 \end{tikzpicture} \hfill \uncover<2->{\begin{tikzpicture}[>=latex]
-\node[rectangle callout, draw, inner sep=5 pt, callout relative pointer={(-200:-1 cm)}, text width=0.45\linewidth] {\large Nested data are in these projects' scope, but as second-class citizens.};
+\node[rectangle callout, draw, inner sep=5 pt, callout relative pointer={(-200:-1 cm)}, text width=0.44\linewidth] {\large Nested data are in these projects' scope, but as second-class citizens.};
 \end{tikzpicture}}
 
 \vspace{0.75 cm}
 \begin{itemize}\setlength{\itemsep}{0.35 cm}
 \item<3-> \textcolor{darkblue}{Spark} DataFrames have arrays of structs, but using them involves a cumbersome explode-groupby or ``drop to RDDs,'' giving up performance.
 \item<4-> \textcolor{darkblue}{Parquet} and \textcolor{darkblue}{Arrow} have lists of records, but they haven't been implemented in C++ and therefore Python yet (last time I checked).
-\item<5-> \textcolor{darkblue}{Pandas} allows arbitrary Python objects in DataFrames, but most operations only apply to numbers.
+\item<5-> \textcolor{darkblue}{HDF5} has rowwise (``unsplit'') lists of compounds.
+\item<6-> \textcolor{darkblue}{Pandas} allows arbitrary Python objects in DataFrames, but most operations only apply to numbers.
 \end{itemize}
 \end{frame}
 
