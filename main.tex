@@ -553,6 +553,12 @@ To the left is a PAW script (pre-ROOT), creating and filling histograms.
 \begin{center}
 \only<1>{\includegraphics[width=0.75\linewidth]{fast-slide-0.png}}\only<2>{\includegraphics[width=0.75\linewidth]{fast-slide-2.png}}
 \end{center}
+
+\vspace{-8 cm}
+\hfill \mbox{\begin{minipage}{2 cm}
+\small Pandas DataFrames filled by \\ \textcolor{darkblue}{AlphaTwirl}, analyzed by \\ \textcolor{darkblue}{F.A.S.T.}
+\end{minipage} \hspace{-0.75 cm}}
+\vspace{8 cm}
 \end{frame}
 
 \begin{frame}[fragile]{Indexed analysis}
@@ -791,7 +797,7 @@ The histograms themselves, however, are more sophisticated in HEP than elsewhere
 \large
 \vspace{0.35 cm}
 \begin{itemize}\setlength{\itemsep}{0.35 cm}
-\item<2-> As far as I have found, \underline{\it only} HEP histogramming tools \textcolor{gray}{(ROOT, YODA, AIDA, HippoDraw, Jas3, mn\_fit, PAW, HBOOK)} conceive of a histogram as a container to be filled, merged, and accessed programmatically.
+\item<2-> As far as I have found, \underline{\it only} HEP histogramming tools \textcolor{gray}{(ROOT, YODA, go-hep/hbook, AIDA, HippoDraw, Jas3, mn\_fit, PAW, HBOOK)} conceive of histograms as containers to be filled, merged, and accessed programmatically.
 \item<3-> In many non-HEP packages, ``histogram'' is more of a display option than an analysis tool, with no way to access contents or control binning.
 \item<4-> ``Profile'' plots are only in HEP. Robust log scales are hard to find, too.
 \end{itemize}
