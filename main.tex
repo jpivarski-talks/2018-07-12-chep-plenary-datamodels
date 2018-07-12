@@ -332,10 +332,10 @@ Performance claims often start the stopwatch after this ``data cleaning.''
 
 \vspace{0.75 cm}
 \begin{itemize}\setlength{\itemsep}{0.35 cm}
-\item<3-> \textcolor{darkblue}{Spark} DataFrames have arrays of structs, but using them involves a cumbersome explode-groupby or ``drop to RDDs,'' giving up performance.
-\item<4-> \textcolor{darkblue}{Parquet} and \textcolor{darkblue}{Arrow} have lists of records, but they haven't been implemented in C++ and therefore Python yet (last time I checked).
-\item<5-> \textcolor{darkblue}{HDF5} has rowwise (``unsplit'') lists of compounds.
-\item<6-> \textcolor{darkblue}{Pandas} allows arbitrary Python objects in DataFrames, but most operations only apply to numbers.
+\item<3-> \textcolor{darkblue}{Spark} DataFrames allow arrays of structs, but using them involves a cumbersome explode-groupby or ``drop to RDDs,'' giving up performance.
+\item<4-> \textcolor{darkblue}{Parquet} and \textcolor{darkblue}{Arrow} specifications define lists of records, but they haven't been implemented in C++ and therefore Python yet (last time I checked).
+\item<5-> \textcolor{darkblue}{HDF5} has lists of compounds, but they're rowwise (``unsplit'').
+\item<6-> \textcolor{darkblue}{Pandas} can put arbitrary Python objects in DataFrames, but most operations only apply to numbers.
 \end{itemize}
 \end{frame}
 
